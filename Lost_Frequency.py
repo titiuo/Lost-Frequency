@@ -118,3 +118,4 @@ if __name__ == '__main__':
     #decode('symboleU.wav')
 
 
+# Pour lancer le programme, exécutez la commande suivante dans un terminal: python3 Lost_Frequency.py <nom_du_fichier_sans_extension>
