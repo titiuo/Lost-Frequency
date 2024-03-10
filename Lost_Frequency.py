@@ -45,7 +45,7 @@ def decode(file:str):
             x_fft[132:]=0
             #show_signal_F(np.abs(x_fft),Fe)
             #index=np.argmax(np.abs(x_fft))
-            index=find_increase_then_decrease(np.abs(x_fft))
+            index=find_second_peak(np.abs(x_fft))
             a=np.round(index/Tec)
             if a in Alphabet :
                 mot+=Alphabet[a]
@@ -78,11 +78,14 @@ def decode(file:str):
     #show_signal_T(x,Fe)
     #show_signal_F(x_fft,Fe)
 
-def find_increase_then_decrease(x_fft):
-    for i in range(len(x_fft) - 2):
-        if x_fft[i] < x_fft[i+1] > x_fft[i+2]:
-            return i+1
-    return -1  # Retourne -1 si aucun point correspondant n'est trouvé
+def find_second_peak(lst):
+    count = 0
+    for i in range(len(lst) - 2):
+        if lst[i] < lst[i+1] > lst[i+2]:
+            count += 1
+            if count == 2:
+                return i+1
+    return -1  # Retourne -1 si aucun deuxième pic n'est trouvé
 
 
 def show_signal_T(x,Fe):
