@@ -32,8 +32,8 @@ def decode(file:str):
         if a in Alphabet :
                 mot+=Alphabet[a]
                 test=False
-                print("basique")
-                print(Alphabet[a])
+                #print("basique")
+                #print(Alphabet[a])
         if a not in Alphabet and max(np.abs(x_fft[:len(x_fft)//2]))>np.mean(np.abs(x_fft[:len(x_fft)//2]))*10:
             x_fft=np.fft.fft(x_symbole)
             #show_signal_F(np.abs(x_fft),Fe)
@@ -49,14 +49,14 @@ def decode(file:str):
             a=np.round(index/Tec)
             if a in Alphabet :
                 mot+=Alphabet[a]
-                print(Alphabet[a])
+                #print(Alphabet[a])
             else:
                 mot+='?'
-                print("?")
-            print("avancé")
+                #print("?")
+            #print("avancé")
         elif test and max(np.abs(x_fft[:len(x_fft)//2]))<np.mean(np.abs(x_fft[:len(x_fft)//2]))*10:
              mot+=' '
-             print("espace")
+             #print("espace")
         offset=offset+2500
         i+=1
     print(mot)
