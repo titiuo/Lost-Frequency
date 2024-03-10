@@ -6,29 +6,27 @@ import IPython.display as ipd
 import soundfile as sf
 import sys
 
-offset=-1
+offset=0
 
 Alphabet = {num: chr(num - 501 + ord('A')-offset) for num in range(501+offset, 527+offset)}
-
 
 def decode(file:str):
     mot=''
     x, Fe = sf.read(file)
-    print(len(x))
+    #show_signal_T(x,Fe)
     T=[i*1/Fe for i in range(len(x))]
-    Tec=T[-1]
     offset=0
     while offset<=len(x)-2000:
+        N=Fe*8
         x_symbole=x[offset:offset+2000]
 
-        x_fft=np.fft.fft(x_symbole)
-        #show_signal_F(np.abs(x_fft),Fe)
+        x_fft=np.fft.fft(x_symbole,N)
+        show_signal_F(np.abs(x_fft),Fe)
         Tec=T[1999]
         index=np.argmax(np.abs(x_fft[:len(x_fft)//2]))
-        a=np.round(index/Tec)
-        #print(a)
+        print(index/Tec*len(x_symbole)/N)
+        a=np.round(index/Tec*len(x_symbole)/N)
         if a in Alphabet :
-                #print(Alphabet[a])
                 mot+=Alphabet[a]
         else :
              mot+=' '
